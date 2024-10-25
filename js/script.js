@@ -21,6 +21,8 @@ function handleStart() {
     });
 
     Promise.allSettled(promises).then((data) => {
+        const isWinner = data.every((item) => item.status === "fulfilled");
+
         data.forEach((item, i) => {
             container.children[i].textContent = "";
 
@@ -32,10 +34,6 @@ function handleStart() {
                     startBtn.disabled = false;
                 }
             }, 1000 * (i + 1));
-        });
-
-        const isWinner = data.every((item) => {
-            item.status === "fulfilled";
         });
     });
 }
